@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Altereats - Fresh Food Delivery</title>
+    <!-- Add AOS (Animate on Scroll) library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Previous styles remain the same until team section -->
+    <style>
+        /* Previous styles remain unchanged... */
+
+        /* Enhanced Team Section */
+        .team-section {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,200,83,0.1) 0%, rgba(0,200,83,0) 100%);
+            pointer-events: none;
+        }
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3436;
+            position: relative;
+        }
+
+        .team-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #00c853;
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+        }
+
+        .team-card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .team-image {
+            width: 100%;
+            padding-top: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-image img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .team-info {
+            padding: 1.5rem;
+            position: relative;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover .team-info {
+            transform: translateY(-5px);
+        }
+
+        .team-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
+            color: #2d3436;
+        }
+
+        .team-card .position {
+            color: #00c853;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .team-card .bio {
+            color: #636e72;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .team-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f1f2f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d3436;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #00c853;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .animated-bg div {
+            position: absolute;
+            border-radius: 50%;
+            background: #00c853;
+            animation: float 15s infinite;
+            opacity: 0.5;
+        }
+
+        .animated-bg div:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .animated-bg div:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            right: 15%;
+            top: 40%;
+            animation-delay: 5s;
+        }
+
+        .animated-bg div:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            left: 30%;
+            bottom: 20%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Intersection Observer Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .team-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Previous sections remain unchanged -->
+
+    <section id="team" class="team-section">
+        <div class="animated-bg">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+        <h2 class="fade-up">Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sarah Johnson">
+                </div>
+                <div class="team-info">
+                    <h3>Vidushi Bhardwaj</h3>
+                    <p class="position">CEO & Founder</p>
+                    <p class="bio">Visionary leader with 15+ years in food tech</p>
+                    <div class="team-social">
+                        <a href="#" class="social-icon">Li</a>
+                        <a href="#" class="social-icon">Tw</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Chen">
+                </div>
+                <div class="team-info">
+                    <h3>Joy Banerjee</h3>
+                    <p class="position">Chief Technology Officer</p>
+                    <p class="bio">Tech innovator & infrastructure expert</p>
+                    <div class="team-social">
+                        <a href="#" class="social-icon">Li</a>
+                        <a href="#" class="social-icon">Gh</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Maria Garcia">
+                </div>
+                <div class="team-info">
+                    <h3>Shivangi</h3>
+                    <p class="position">Operations Director</p>
+                    <p class="bio">Supply chain & logistics specialist</p>
+                    <div class="team-social">
+                        <a href="#" class="social-icon">Li</a>
+                        <a href="#" class="social-icon">Tw</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="James Wilson">
+                </div>
+                <div class="team-info">
+                    <h3>Aaaron Coutinho </h3>
+                    <p class="position">Customer Experience Head</p>
+                    <p class="bio">Customer satisfaction strategist</p>
+                    <div class="team-social">
+                        <a href="#" class="social-icon">Li</a>
+                        <a href="#" class="social-icon">Tw</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Previous sections continue -->
+
+    <script>
+        // Intersection Observer for animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all team cards and fade-up elements
+        document.querySelectorAll('.team-card, .fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

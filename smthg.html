@@ -1,0 +1,182 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Altereats - Fresh Food Delivery</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style> 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #087f5b;
+        }
+
+        .logo-circle {
+            width: 24px;
+            height: 24px;
+            background-image: url(Screenshot\ 2025-02-02\ 222046.png);
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #087f5b;
+        } 
+    
+        .sign-in {
+            background: #00c853;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .sign-in:hover {
+            background: #00a844;
+        } 
+
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #e8fff3 0%, #b9ffe7 100%);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        } 
+
+         .hero-title {
+            font-size: 4rem;
+            color: #2d3436;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        } 
+
+        .hero-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            position: relative;
+        } 
+
+        .food-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .food-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .get-started {
+            background: #00c853;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .get-started:hover {
+            background: #00a844;
+            transform: translateY(-2px);
+        } 
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-circle"></div>
+            Altereats
+        </div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#partners">Partners</a>
+            <a href="#plus">Altereats Plus</a>
+            <a href="#about">About us</a>
+        </div>
+        <button class="sign-in">Sign In</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Freshness in<br>every bite.</h1>
+            <button class="get-started">Get Started</button>
+        </div>
+        <div class="hero-images">
+            <img src="Designer.png" alt="Fresh salad bowl" class="food-image floating">
+            <img src="image-removebg-preview.png" alt="Gourmet burger" class="food-image" style="animation-delay: 1.5s">
+            <img src="download__4_-removebg-preview.png" alt="Healthy smoothie" class="food-image" style="animation-delay: 0.5s">
+            <img src="download__4_-removebg-preview.png" alt="Fresh ingredients" class="food-image floating" style="animation-delay: 2s">
+        </div>
+    </section>
+</body>
+</html> 
+

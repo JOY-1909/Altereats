@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In - Altereats</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8fff3 0%, #b9ffe7 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .signin-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #087f5b;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 24px;
+            height: 24px;
+            background: #087f5b;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2d3436;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00c853;
+            box-shadow: 0 0 0 3px rgba(0,200,83,0.1);
+        }
+
+        .submit-btn {
+            background: #00c853;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #00a844;
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group.error input {
+            border-color: #e53e3e;
+        }
+
+        .form-group.error .error {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-container">
+        <a href="index.html" class="logo">
+            <div class="logo-circle"></div>
+            Altereats
+        </a>
+        <h1>Welcome Back</h1>
+        <form id="signinForm" onsubmit="return validateForm(event)">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error">Please enter your full name</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                <div class="error">Please enter a valid 10-digit phone number</div>
+            </div>
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('signinForm');
+            const formGroups = form.getElementsByClassName('form-group');
+            let isValid = true;
+
+            // Reset previous errors
+            for(let group of formGroups) {
+                group.classList.remove('error');
+            }
+
+            // Validate email
+            const email = document.getElementById('email');
+            if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                email.parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate phone
+            const phone = document.getElementById('phone');
+            if (!phone.value.match(/^[0-9]{10}$/)) {
+                phone.parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate name
+            const name = document.getElementById('name');
+            if (name.value.length < 2) {
+                name.parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Sign-in successful!');
+                // Here you would typically send the data to your server
+                form.reset();
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
